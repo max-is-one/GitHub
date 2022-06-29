@@ -9,118 +9,156 @@ namespace GitHub
     internal class Cannon
     {
         private char[,] lake;
-        public Cannon(char[,]lake)
+        public Cannon(char[,]lake) //конструктор
         {
             this.lake = lake;
         }
-        public char Pull(char cannon, int column)
+        public char Pull(char fish_cannon, int column) //заповнення пушкі рибкою
         {
-            if (cannon == ' ')
+            if (fish_cannon == ' ')
             {
-                for (int i = column, j = 5; j >= 0; j--)
+                for (int i = column, j = 4; j >= 0; j--)
                 {
-                    if (lake[column, j] != ' ')
+                    if (lake[j, column] != ' ')
                     {
-                        char temp = lake[column, j];
-                        lake[column, j] = ' ';
+                        char temp = lake[j, column];
+                        lake[j, column] = ' ';
+                        Console.Beep();
                         return temp;
                     }
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n\tТут немає рибок!!!");
+                Console.ResetColor();
             }
             else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n\tПушка вже заповнена!!!");
-            return cannon;
+                Console.ResetColor();
+            }
+            return fish_cannon;
         }
-        public char Push(char cannon, int column)
+        public char Push(char fish_cannon, int column) //вистріл рибкою
         {
-            if (cannon != ' ')
+            if (fish_cannon != ' ')
             {
-                for (int i = column, j = 5; j >= 0; j--)
+                for (int i = column, j = 4; j >= 0; j--)
                 {
-                    if (lake[column, j] != ' ')
-                        return Eat_fish(cannon, lake, column, j);
+                    if (lake[j, column] != ' ')
+                    {
+                        Console.Beep();
+                        return Eat_fish(fish_cannon, lake, column, j);
+                    }
                 }
+                lake[0, column] = fish_cannon;
+                fish_cannon = ' ';
+                Console.Beep();
             }
             else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n\tПушка пуста!!!");
-            return cannon;
+                Console.ResetColor();
+            }
+            return fish_cannon;
         }
-        public char Eat_fish(char fish_cannon, char[,]lake, int column, int line)
+        public char Eat_fish(char fish_cannon, char[,]lake, int column, int line) //з'їдання риби
         {
-            if (lake[column,line] == 'B') 
+            if (lake[line, column] == 'B') 
             {
                 if (fish_cannon == 'm' || fish_cannon == 'M')
                 {
-                    lake[column, line] = ' ';
+                    lake[line, column] = ' ';
                     fish_cannon = ' ';
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nВеличезна рибка лопнула!");
+                    Console.ResetColor();
+
                 }
                 else
                 {
-                    this.lake[column, line + 1] = fish_cannon;
+                    this.lake[line + 1, column] = fish_cannon;
                     fish_cannon = ' ';
                 }
             }
-            if (lake[column,line] == 'b') 
+            if (lake[line, column] == 'b') 
             {
                 if (fish_cannon == 'm' || fish_cannon == 'M')
                 {
-                    lake[column, line] = 'B';
+                    lake[line, column] = 'B';
                     fish_cannon = ' ';
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nВелика рибка лопнула!");
+                    Console.ResetColor();
                 }
                 else
                 {
-                    this.lake[column, line + 1] = fish_cannon;
+                    this.lake[line + 1, column] = fish_cannon;
                     fish_cannon = ' ';
                 }
             }
-            if (lake[column,line] == 'M') 
+            if (lake[line, column] == 'M') 
             {
                 if (fish_cannon == 's')
                 {
-                    lake[column, line] = ' ';
+                    lake[line, column] = ' ';
                     fish_cannon = ' ';
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nТовста середня рибка лопнула!");
+                    Console.ResetColor();
                 }
                 else
                 {
-                    this.lake[column, line + 1] = fish_cannon;
+                    this.lake[line + 1, column] = fish_cannon;
                     fish_cannon = ' ';
                 }
             }
-            if (lake[column,line] == 'm') 
+            if (lake[line, column] == 'm') 
             { 
                 if(fish_cannon == 's')
                 {
-                    lake[column, line] = 'M';
+                    lake[line, column] = 'M';
                     fish_cannon = ' ';
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nСередня рибка стала товстою!");
+                    Console.ResetColor();
                 }
                 else
                 {
-                    this.lake[column, line + 1] = fish_cannon;
+                    this.lake[line + 1, column] = fish_cannon;
                     fish_cannon = ' ';
                 }
             }
-            if (lake[column, line] == 's')
+            if (lake[line, column] == 's')
             {
-                this.lake[column, line + 1] = fish_cannon;
+                this.lake[line + 1, column] = fish_cannon;
                 fish_cannon = ' ';
             }
             return fish_cannon;
         }
-        public void Print(int column, char s)
+        public void Print(int column, char s) //друк
         {
             if (s == ' ')
                 s = '0';
             for (int i = 0; i < lake.GetLength(0); i++)
             {
-                for(int j = 0; j < lake.GetLength(1); j++)
-                    Console.Write($"|{lake[i,j]}");
+                for (int j = 0; j < lake.GetLength(1); j++)
+                {
+                    Console.Write("|");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(lake[i, j]);
+                    Console.ResetColor();
+                }
                 Console.Write('|');
                 Console.WriteLine();
             }
             Console.WriteLine("\n\n");
             for (int i = 0; i != column * 2; i++)
                 Console.Write(' ');
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($" {s}\n");
+            Console.ResetColor();
         }
     }
 }

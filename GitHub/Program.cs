@@ -19,6 +19,10 @@ namespace GitHub
                     lake[i, j] = ' ';
             }
             Cannon cannon = new Cannon(lake);
+            //lake[0, 3] = 's';
+            //lake[1, 4] = 's';
+            //lake[2, 0] = 'M';
+            //lake[4, 0] = 'm';
 
             char Cannon_C = ' ';
             int column = 0;
@@ -29,6 +33,9 @@ namespace GitHub
             Console.WriteLine("\nНажимайте '←' - щоб перемiститись влiво\nНажимайте '→' - щоб перемiститись вправо");
             while (program)
             {
+                //Console.WriteLine("\t|ГРА З РИБКАМИ|");
+                //Console.WriteLine("\nНажимайте '↓' - щоб втягнути рибку у пушку\nНажимайте '↑' - щоб зкормити рибку iншiй");
+                //Console.WriteLine("\nНажимайте '←' - щоб перемiститись влiво\nНажимайте '→' - щоб перемiститись вправо");
                 Console.WriteLine("\n" + maket_1);
                 Console.WriteLine(maket_2);
                 cannon.Print(column, Cannon_C);
@@ -51,6 +58,7 @@ namespace GitHub
                     if (column != 0)
                         column--;
                 }
+                //Console.Clear();
             }
         }
         static void Main(string[] args)
