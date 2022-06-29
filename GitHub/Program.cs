@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GitHub
 {
@@ -12,7 +8,8 @@ namespace GitHub
         {
             Console.WriteLine("\n\tHELLO WORLD\n");
             Console.WriteLine("\n\tHELLO WORLD\n");
-            Console.ReadKey();
+            Console.WriteLine("________");
+
             //o_O
         }
     }
