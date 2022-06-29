@@ -16,7 +16,7 @@ namespace GitHub
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
-                    lake[i, j] = 's';
+                    lake[i, j] = ' ';
             }
             Cannon cannon = new Cannon(lake);
 
