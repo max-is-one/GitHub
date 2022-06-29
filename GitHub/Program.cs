@@ -8,14 +8,51 @@ namespace GitHub
 {
     internal class Program
     {
+        static public void Pull(char cannon, int column)
+        {
+            if (cannon == ' ')
+            {
+                for(int i = column, j = 5; j >= 0; j--)
+                {
+
+                }
+            }
+            else
+                Console.WriteLine("\n\tПушка вже заповнена!!!");
+        }
+        static public void Push(char cannon, int column)
+        {
+
+        }
         static void Main(string[] args)
         {
-            Console.WriteLine("\n\tHELLO WORLD\n");
-            Console.WriteLine("\n\tHELLO WORLD\n");
+            char Cannon = ' ';
+            int Column = 0;
+            bool program = true;
+            Console.WriteLine("\t|ГРА З РИБКАМИ|");
+            Console.WriteLine("\nНажимайте '↓' - щоб втягнути рибку у пушку\nНажимайте '↑' - щоб зкормити рибку iншiй");
+            Console.WriteLine("\nНажимайте '←' - щоб перемiститись влiво\nНажимайте '↑' - щоб перемiститись вправо");
+            while (program)
+            {
+                ConsoleKeyInfo key = Console.ReadKey();
+                if (key.Key == ConsoleKey.DownArrow)
+                {
+                    Pull(Cannon, Column);
+                }
+                if (key.Key == ConsoleKey.UpArrow)
+                {
+
+                }
+                if (key.Key == ConsoleKey.RightArrow)
+                {
+
+                }
+                if (key.Key == ConsoleKey.LeftArrow)
+                {
+
+                }
+            }
             Console.ReadKey();
-            //Accept
-            //o_O
-            //commit
         }
     }
 }
