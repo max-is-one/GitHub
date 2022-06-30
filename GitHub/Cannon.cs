@@ -61,7 +61,7 @@ namespace GitHub
         }
         public char Eat_fish(char fish_cannon, char[,]lake, int column, int line) //з'їдання риби
         {
-            if (lake[line, column] == 'B') 
+            if (lake[line, column] == 'B')          //Механіка величезної риби
             {
                 if (fish_cannon == 'm' || fish_cannon == 'M')
                 {
@@ -70,19 +70,31 @@ namespace GitHub
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("\nВеличезна рибка лопнула!");
                     Console.ResetColor();
-
                 }
                 else
                 {
-                    this.lake[line + 1, column] = fish_cannon;
-                    fish_cannon = ' ';
+                    if (line != 4)
+                    {
+                        this.lake[line + 1, column] = fish_cannon;
+                        fish_cannon = ' ';
+                    }
+                    else
+                        Limit();
                 }
             }
-            if (lake[line, column] == 'b') 
+            if (lake[line, column] == 'b')          //Механіка великої риби
             {
-                if (fish_cannon == 'm' || fish_cannon == 'M')
+                if (fish_cannon == 'm')
                 {
                     lake[line, column] = 'B';
+                    fish_cannon = ' ';
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nВелика рибка стала величезною!");
+                    Console.ResetColor();
+                }
+                else if(fish_cannon == 'M')
+                {
+                    lake[line, column] = ' ';
                     fish_cannon = ' ';
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("\nВелика рибка лопнула!");
@@ -90,11 +102,16 @@ namespace GitHub
                 }
                 else
                 {
-                    this.lake[line + 1, column] = fish_cannon;
-                    fish_cannon = ' ';
+                    if (line != 4)
+                    {
+                        this.lake[line + 1, column] = fish_cannon;
+                        fish_cannon = ' ';
+                    }
+                    else
+                        Limit();
                 }
             }
-            if (lake[line, column] == 'M') 
+            if (lake[line, column] == 'M')      //Механіка товстої середньої риби
             {
                 if (fish_cannon == 's')
                 {
@@ -106,11 +123,16 @@ namespace GitHub
                 }
                 else
                 {
-                    this.lake[line + 1, column] = fish_cannon;
-                    fish_cannon = ' ';
+                    if (line != 4)
+                    {
+                        this.lake[line + 1, column] = fish_cannon;
+                        fish_cannon = ' ';
+                    }
+                    else
+                        Limit();
                 }
             }
-            if (lake[line, column] == 'm') 
+            if (lake[line, column] == 'm')      //Механіка середньої риби
             { 
                 if(fish_cannon == 's')
                 {
@@ -122,16 +144,30 @@ namespace GitHub
                 }
                 else
                 {
+                    if (line != 4)
+                    {
+                        this.lake[line + 1, column] = fish_cannon;
+                        fish_cannon = ' ';
+                    }
+                    else
+                        Limit();
+                }
+            }
+            if (lake[line, column] == 's')      //Механіка маленької риби
+            {
+                if (line != 4)
+                {
                     this.lake[line + 1, column] = fish_cannon;
                     fish_cannon = ' ';
                 }
-            }
-            if (lake[line, column] == 's')
-            {
-                this.lake[line + 1, column] = fish_cannon;
-                fish_cannon = ' ';
+                else
+                    Limit();
             }
             return fish_cannon;
+            void Limit()        //Обмеження поля
+            {
+                Console.WriteLine("\nНемає тут мiсця!\n");
+            }
         }
         public void Print(ref char[,] _lake, int column, char s) //друк
         {

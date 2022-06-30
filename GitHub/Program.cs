@@ -22,6 +22,8 @@ namespace GitHub
                     lake[i, j] = ' ';
             }
             Cannon cannon = new Cannon(lake);
+
+            //test
             //lake[0, 3] = 's';
             //lake[1, 4] = 's';
             //lake[2, 0] = 'M';
@@ -62,30 +64,24 @@ namespace GitHub
                 if (key.Key == ConsoleKey.DownArrow)
                 {
                     Cannon_C = cannon.Pull(Cannon_C, column);
-                    Console.Clear();
                 }
                 if (key.Key == ConsoleKey.UpArrow)
                 {
                     Cannon_C = cannon.Push(Cannon_C, column);
                     count++;
                     count_progres++;
-                    Console.Clear();
                 }
                 if (key.Key == ConsoleKey.RightArrow)
                 {
                     if (column != lake.GetLength(0) - 1)
                         column++;
-                    Console.Clear();
                 }
                 if (key.Key == ConsoleKey.LeftArrow)
                 {
                     if (column != 0)
                         column--;
-                    Console.Clear();
                 }
-                 count_progres.ToString();
-
-                
+                 count_progres.ToString();    
             }
         }
         static void Main(string[] args)
