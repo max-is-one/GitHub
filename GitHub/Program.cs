@@ -8,52 +8,67 @@ namespace GitHub
 {
     internal class Program
     {
-        static void AddFishs(ref char[,] lake)
+        static void Game()
         {
-            char[] fishs = new char[5];
-            Random r = new Random();
-            int value;
-            for(int i = 0; i < 4; i++)
-            {
-                value = r.Next(100);
-
-                if (value < 30)
-                {
-                    fishs[i] = ' ';
-                }else if(value>=30 && value <= 69)
-                {
-                    fishs[i] = 'm';
-                }else if(value>=70 && value <= 89)
-                {
-                    fishs[i] = 'b';
-                }
-                else
-                {
-                    fishs[i] = 's';
-                }
-            }
-            for(int i = 0; i < 5; i++)
-            {
-                for(int j = 0; j < 5; j++)
-                {
-                    if(lake[i,j]!=' ')
-                    {
-                        lake[i, j] = fishs[i];
-                    }
-                }
-            }
-        }
-        static void Main(string[] args)
-        {
-            Console.WriteLine("ExploedFish");
-            char[] column = new char[] { '|', '1', '|', '2', '|', '3', '|', '4', '|', '5', '|' };
+            string maket_1 = "___________";
+            string maket_2 = "|1|2|3|4|5|";
             char[,] lake = new char[5, 5];
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                     lake[i, j] = ' ';
             }
-            
+            Cannon cannon = new Cannon(lake);
+            //lake[0, 3] = 's';
+            //lake[1, 4] = 's';
+            //lake[2, 0] = 'M';
+            //lake[4, 0] = 'm';
+
+            char Cannon_C = ' ';
+            int column = 0;
+            bool program = true;
+
+            Console.WriteLine("\t|ГРА З РИБКАМИ|");
+            Console.WriteLine("\nНажимайте '↓' - щоб втягнути рибку у пушку\nНажимайте '↑' - щоб зкормити рибку iншiй");
+            Console.WriteLine("\nНажимайте '←' - щоб перемiститись влiво\nНажимайте '→' - щоб перемiститись вправо");
+            while (program)
+            {
+                //Console.WriteLine("\t|ГРА З РИБКАМИ|");
+                //Console.WriteLine("\nНажимайте '↓' - щоб втягнути рибку у пушку\nНажимайте '↑' - щоб зкормити рибку iншiй");
+                //Console.WriteLine("\nНажимайте '←' - щоб перемiститись влiво\nНажимайте '→' - щоб перемiститись вправо");
+                Console.WriteLine("\n" + maket_1);
+                Console.WriteLine(maket_2);
+                cannon.Print(column, Cannon_C);
+                ConsoleKeyInfo key = Console.ReadKey();
+                if (key.Key == ConsoleKey.DownArrow)
+                {
+                    Cannon_C = cannon.Pull(Cannon_C, column);
+                }
+                if (key.Key == ConsoleKey.UpArrow)
+                {
+                    Cannon_C = cannon.Push(Cannon_C, column);
+                }
+                if (key.Key == ConsoleKey.RightArrow)
+                {
+                    if (column != lake.GetLength(0) - 1)
+                        column++;
+                }
+                if (key.Key == ConsoleKey.LeftArrow)
+                {
+                    if (column != 0)
+                        column--;
+                }
+                //Console.Clear();
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("\n\tHELLO WORLD\n");
+            Console.WriteLine("\n\tHELLO WORLD\n");
+            Console.ReadKey();
+            //Accept
+            //o_O
+            //commit
         }
     }
 }
