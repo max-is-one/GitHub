@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GitHub
 {
@@ -137,17 +133,17 @@ namespace GitHub
             }
             return fish_cannon;
         }
-        public void Print(int column, char s) //друк
+        public void Print(ref char[,] _lake, int column, char s) //друк
         {
             if (s == ' ')
                 s = '0';
-            for (int i = 0; i < lake.GetLength(0); i++)
+            for (int i = 0; i < _lake.GetLength(0); i++)
             {
-                for (int j = 0; j < lake.GetLength(1); j++)
+                for (int j = 0; j < _lake.GetLength(1); j++)
                 {
                     Console.Write("|");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(lake[i, j]);
+                    Console.Write(_lake[i, j]);
                     Console.ResetColor();
                 }
                 Console.Write('|');
